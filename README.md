@@ -2,6 +2,11 @@
 
 上海大学图书馆手机版后端
 
+## docker
+```shell
+docker run -p 5000:5000 -e REDIS_IP=REDIS_IP zhoudian64/shu-library
+````
+
 ## 安装依赖
 
 需要Python3：
@@ -21,6 +26,7 @@ pip3 install -r requirements.txt
 ### 开发环境
 
 ```shell
+export REDIS_IP=localhost
 export FLASK_APP=app
 flask run
 ```
