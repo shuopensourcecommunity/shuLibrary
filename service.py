@@ -12,7 +12,7 @@ class CredentialRequired(Exception):
     pass
 
 
-class ServiceUnavailable(Exception):
+class ServiceError(Exception):
     pass
 
 
@@ -68,7 +68,7 @@ class Student(object):
         except InvalidCredential as e:
             raise e
         except Exception as e:
-            raise ServiceUnavailable(str(e))
+            raise ServiceError(str(e))
 
     def get_loans(self):
         try:
@@ -104,7 +104,7 @@ class Student(object):
                     })
             return result
         except Exception as e:
-            raise ServiceUnavailable(str(e))
+            raise ServiceError(str(e))
 
     def get_histories(self):
         try:
@@ -139,4 +139,4 @@ class Student(object):
                     })
             return result
         except Exception as e:
-            raise ServiceUnavailable(str(e))
+            raise ServiceError(str(e))

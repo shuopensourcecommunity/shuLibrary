@@ -21,7 +21,7 @@ pip3 install -r requirements.txt
 
 ## 运行
 
-运行前请确保redis-server正在工作，可通过app.py中的app.config['REDIS_KWARGS']参数调整host和port（默认为127.0.0.1:6379）
+运行前请确保redis-server正在工作，可通过app.py中的`app.config['REDIS_KWARGS']`参数调整host和port（默认为127.0.0.1:6379）
 
 ### 开发环境
 

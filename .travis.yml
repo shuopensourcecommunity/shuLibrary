@@ -1,11 +1,11 @@
 services:
-  - docker
+- docker
 jobs:
   include:
-    - stage: build
-      language: minimal
-      script:
-        - docker build . -t shu-library
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker tag shu-library $DOCKER_USERNAME/shu-library
-        - docker push $DOCKER_USERNAME/shu-library
+  - stage: build
+    language: minimal
+    script:
+    - docker build . -t shu-library
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker tag shu-library $DOCKER_USERNAME/shu-library
+    - docker push $DOCKER_USERNAME/shu-library
