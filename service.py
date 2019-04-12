@@ -1,5 +1,6 @@
 import re
 import requests
+from fake_useragent import FakeUserAgent
 from bs4 import BeautifulSoup, element
 
 
@@ -20,6 +21,9 @@ class Student(object):
     _base_info_url = None
     _session = requests.Session()
     _request_timeout = 8
+
+    def __init__(self):
+        self._session.headers['User-Agent'] = FakeUserAgent().random
 
     def login(self, username, password):
         try:

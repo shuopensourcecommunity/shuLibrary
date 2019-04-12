@@ -19,9 +19,9 @@ def connect_db():
 @v1.route('/login', methods=['POST'])
 def login():
     input_data = request.get_json()
-    username = input_data.get('username')
-    password = input_data.get('password')
-    if username is None or password is None:
+    username = input_data.get('username', '')
+    password = input_data.get('password', '')
+    if username == '' or password == '':
         abort(400)
     student = Student()
     try:
@@ -80,4 +80,4 @@ def histories():
 def errorhandler(error):
     return jsonify({
         'error': error.description
-    })
+    }), error.code

@@ -1,7 +1,9 @@
-werkzeug
-beautifulsoup4
 Flask
+beautifulsoup4
+certifi
+fake-useragent
 gunicorn
 lxml
 redis
 requests
+werkzeug
