@@ -1,4 +1,5 @@
 import re
+import time
 import requests
 from fake_useragent import FakeUserAgent
 from bs4 import BeautifulSoup, element
@@ -42,23 +43,27 @@ class Student(object):
             soup = BeautifulSoup(response.text, 'lxml')
             a = soup.find('a')
             assert isinstance(a, element.Tag)
+            time.sleep(0.2)
 
             response = self._session.get(self._base_url + a['href'], timeout=self._request_timeout)
             response.raise_for_status()
             url_list = re.findall(r'var url = \'(.*?)\'', response.text)
             assert len(url_list) == 1
+            time.sleep(0.2)
 
             response = self._session.get(url_list[0], timeout=self._request_timeout)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'lxml')
             a = soup.find('a')
             assert isinstance(a, element.Tag)
+            time.sleep(0.2)
 
             response = self._session.get(self._base_url + a['href'], timeout=self._request_timeout)
             response.raise_for_status()
             response.encoding = 'utf-8'
             url_list = re.findall('<a href="(.*?)" title="查看图书馆读者个人信息"', response.text)
             assert len(url_list) == 1
+            time.sleep(0.2)
 
             response = self._session.get(url_list[0], timeout=self._request_timeout)
             response.raise_for_status()

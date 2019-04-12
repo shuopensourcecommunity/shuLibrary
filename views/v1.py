@@ -3,7 +3,7 @@ from redis import Redis
 from werkzeug.exceptions import HTTPException
 from flask import Blueprint, abort, current_app, g, jsonify, request
 
-from service import Student, InvalidCredential, CredentialRequired
+from service import Student, InvalidCredential, CredentialRequired, ServiceError
 from auth_token import AuthToken, BadToken
 
 v1 = Blueprint(__name__, __name__, url_prefix='/')
@@ -28,6 +28,8 @@ def login():
         student.login(username, password)
     except InvalidCredential as error:
         abort(401, str(error))
+    except Exception as error:
+        abort(500, str(error))
     g.db.set('shu-library-{}'.format(username), pickle.dumps(student), ex=3600)
     return jsonify({
         'token': AuthToken().generate_jwt(username)
@@ -53,6 +55,8 @@ def loans():
         abort(403)
     except BadToken as error:
         abort(403, str(error))
+    except Exception as error:
+        abort(500, str(error))
 
 
 @v1.route('/histories', methods=['GET'])
@@ -74,6 +78,8 @@ def histories():
         abort(403)
     except BadToken as error:
         abort(403, str(error))
+    except Exception as error:
+        abort(500, str(error))
 
 
 @v1.errorhandler(HTTPException)

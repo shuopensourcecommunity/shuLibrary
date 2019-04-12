@@ -1,4 +1,4 @@
-FROM python:3.7.2
+FROM python:3
 COPY . .
 RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 RUN python -c "from fake_useragent import FakeUserAgent; FakeUserAgent();"
