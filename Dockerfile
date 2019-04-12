@@ -1,4 +1,5 @@
 FROM python:3.7.2
+RUN apk add gcc python-dev libxml2-dev libxslt-dev musl-dev
 COPY . .
 RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 EXPOSE 5000
