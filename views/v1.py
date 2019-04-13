@@ -48,8 +48,10 @@ def loans():
         if raw_student_data is None:
             abort(403)
         student = pickle.loads(raw_student_data)
+        _loans = student.get_loans()
+        g.db.set('shu-library-{}'.format(username), pickle.dumps(student), ex=3600)
         return jsonify({
-            'histories': student.get_loans()
+            'loans': _loans
         })
     except CredentialRequired:
         abort(403)
@@ -71,8 +73,10 @@ def histories():
         if raw_student_data is None:
             abort(403)
         student = pickle.loads(raw_student_data)
+        _histories = student.get_histories()
+        g.db.set('shu-library-{}'.format(username), pickle.dumps(student), ex=3600)
         return jsonify({
-            'histories': student.get_histories()
+            'histories': _histories
         })
     except CredentialRequired:
         abort(403)
